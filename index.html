@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orchestra — Intelligence Terra</title>
+    <title>Orchestra Intelligence — IA Terra</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -21,29 +21,26 @@
             -webkit-font-smoothing: antialiased;
         }
         .apple-glass {
-            background: rgba(255, 255, 255, 0.72);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
         }
         .sf-card {
             background: white;
             border-radius: 32px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.04);
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .sf-card:hover {
             transform: scale(1.02);
             box-shadow: 0 20px 48px rgba(0,0,0,0.08);
         }
-        @keyframes reveal {
-            from { opacity: 0; transform: translateY(30px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-reveal {
-            animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        ::selection {
-            background: rgba(0, 102, 204, 0.2);
+        .animate-up {
+            animation: slideUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
     </style>
     <script type="importmap">

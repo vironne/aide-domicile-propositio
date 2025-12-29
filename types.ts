@@ -11,24 +11,18 @@ export interface ScenarioStep {
   content: string | string[];
 }
 
+export interface ScenarioSection {
+  title: string;
+  subtitle?: string;
+  items: string[];
+  type: 'negative' | 'positive' | 'visual' | 'alert';
+}
+
 export interface Scenario {
   id: string;
   title: string;
   subtitle: string;
-  before: {
-    title: string;
-    description: string;
-    steps: string[];
-  };
-  after: {
-    title: string;
-    internalTitle: string;
-    internalSteps: string[];
-    userTitle: string;
-    userSteps: string[];
-    prepTitle?: string;
-    prepSteps?: string[];
-  };
+  sections: ScenarioSection[];
   result: string[];
 }
 
