@@ -1,18 +1,13 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-// Safe access to API_KEY to prevent ReferenceError in browser environments
-const getApiKey = () => {
-  try {
-    return process.env.API_KEY || "";
-  } catch (e) {
-    return "";
-  }
-};
-
 export const getAssistantResponse = async (prompt: string, context: string) => {
-  const apiKey = getApiKey();
-  if (!apiKey) return "Veuillez configurer votre clé API pour tester l'assistant.";
+  // Safe extraction of API KEY
+  const apiKey = typeof process !== 'undefined' ? (process.env.API_KEY || "") : "";
+  
+  if (!apiKey) {
+    return "L'assistant est en mode démonstration. Veuillez configurer une clé API pour obtenir des réponses réelles.";
+  }
 
   try {
     const ai = new GoogleGenAI({ apiKey });
@@ -20,18 +15,18 @@ export const getAssistantResponse = async (prompt: string, context: string) => {
       model: 'gemini-3-flash-preview',
       contents: prompt,
       config: {
-        systemInstruction: `Tu es un assistant IA bienveillant conçu pour les équipes d'aide à domicile sous la plateforme Orchestra Intelligence. 
-        Ton ton est calme, rassurant, professionnel et empathique.
-        Ton objectif est de réduire le stress de l'utilisateur.
-        Contexte actuel : ${context}. 
-        Réponds de manière concise (max 3-4 phrases) et structurée.`,
-        temperature: 0.7,
+        systemInstruction: `Tu es un assistant IA d'élite, conçu avec la philosophie d'excellence d'Apple, pour la plateforme Orchestra Intelligence. 
+        Ton ton est minimaliste, pur, rassurant et extrêmement précis.
+        Contexte : ${context}.
+        Ta mission : Transformer l'anxiété du terrain en sérénité opérationnelle par des conseils concrets et empathiques.
+        Format : Réponses courtes (max 3 phrases), impactantes.`,
+        temperature: 0.6,
       },
     });
 
-    return response.text || "Désolé, je n'ai pas pu générer de réponse.";
+    return response.text || "Je n'ai pas pu formuler de réponse. Veuillez réessayer.";
   } catch (error) {
-    console.error("Gemini Error:", error);
-    return "Une erreur est survenue lors de la communication avec l'assistant.";
+    console.error("Gemini System Error:", error);
+    return "Une perturbation temporaire empêche la connexion à l'intelligence centrale.";
   }
 };
